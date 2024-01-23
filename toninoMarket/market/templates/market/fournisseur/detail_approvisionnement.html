@@ -1,0 +1,62 @@
+{% extends 'market/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container m">
+        <h2 class="display-5 text-center mb-2 ">Detail de  l'approvisionnement</h2>
+ 
+        <div class="row">    
+            &nbsp;&nbsp;&nbsp;<a class="text-decoration-none add mb-3" href="{% url 'approvisionnements'%}" style="max-width: 80px;">Retour</a>   
+
+            <div class="col-md-12 mb-3 ">
+                
+                <div class="card p-2 h-100 actu shadow ">
+                    <div class="row">
+                            <div class="col-md-6 ">
+
+                                {% if True %}
+                                    <div class="">
+                                        <button type="button" class="mt-4 btn add"><a class="text-decoration-none text_black" href="{% url 'accuse_reception' approvisionnement.id %}">Accusé la reception</a></button>
+                                    </div>
+                                {% endif %}
+                                <div class="p-2"> 
+                                    <dl>
+                                        <dt>Titre</dt>
+                                        <dd>{{approvisionnement.titre}}</dd>
+                                    </dl>    
+                                    <dl>
+                                        <dt>Date de la demande</dt>
+                                        <dd>{{ approvisionnement.date_demande }}</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Produit</dt>
+                                        <dd>{{approvisionnement.produit.designation}} </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Quantité</dt>
+                                        <dd>{{approvisionnement.quantite}} </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Fournisseur nom</dt>
+                                        <dd>{{approvisionnement.fournisseur.nom}} </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Fournisseur nom</dt>
+                                        <dd>{{approvisionnement.fournisseur.prenom}} </dd>
+                                    </dl>
+                                </div>
+                            
+                            </div>    
+                            <div class="col-md-6 ">
+
+                                <img src="{% static 'market/images/appro.jpg' %}" alt="Image standard du médecin" class="img-fluid " style="min-height:450px; min-width: 520; max-height:382px">
+            
+                            </div>
+                    </div>
+                </div>
+
+            </div>  
+
+
+        </div>  
+    </div>    
+{% endblock %}

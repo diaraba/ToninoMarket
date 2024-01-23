@@ -1,0 +1,17 @@
+{% for categorie in categories %}
+
+<div class="col-md-3 mb-5">
+    <div class="card p-2 h-100 actu liste text-center">
+        <div class="p-2 ">
+            <h1><a href="{% url 'categorie_detail' categorie.id %}" class="text-decoration-none  display-5">{{categorie.code}}</a></h1>
+
+            <p>{{ categorie.libelle }}</p>
+        </div>
+        <div class=" spacing">
+            <a href="{% url 'categorie_detail' categorie.id %}" class="fa-solid fa-eye text-decoration-none"></button>
+            <a href="{% url 'edit_categorie' categorie.id %}"  class="fa-solid fa-pen-to-square text-decoration-none"></a>
+            <a href="{% url 'delete_categorie' categorie.id %}" class="fa-solid fa-trash" ></a>
+        </div>
+    </div>
+</div>
+{% endfor %}  

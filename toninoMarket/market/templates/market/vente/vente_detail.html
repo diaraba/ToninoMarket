@@ -1,0 +1,43 @@
+{% extends 'market/base.html' %}
+
+{% block content %}
+                <h2 class="display-5 text-center mt-2">Transaction</h2>
+
+                <div class="row mb-3">
+                    <div class="col-md-3">`
+                        <a class="text-decoration-none fa fa-arrow-left eye" href="{% url 'achats_client' vente.client.id%}" ><button type="button" class="mt-2 mb-2 btn btn-light " ></button></a>
+
+                    </div>
+    
+                    <div class="card p-2 h-100 actu shadow text-center col-md-6 brandgb" >
+                        <dl>
+                            <dt class="lead">Designation</dt>
+                            <dd  class="gras">{{vente.produit.designation}}</dd>
+                        </dl>
+                        <dl>
+                            <dt class="lead">Quantité</dt>
+                            <dd  class="gras">{{ vente.quantite }} </dd>
+                        </dl>
+                        <dl>
+                            <dt class="lead">Montant a payé</dt>
+                            <dd class="gras">{{vente.montant}} </dd>
+                        </dl>
+                        <dl>
+                            <dt class="thin">Prenom caissier</dt>
+                            <dd>{{vente.caissier.prenom}} </dd>
+                        </dl>
+                        <dl>
+                            <dt class="thin">Nom caissier</dt>
+                            <dd>{{vente.caissier.nom}} </dd>
+                        </dl>
+                                    
+                        <div class="spacing">
+                            <a href="{% url 'achats_client' vente.client.id%}"  class="text_button   btn btn-light add1">Achats du client</a>
+                            <button class="btn add text_button " type="submit"><a href="{% url 'ajouter_vente'%}" class="text-decoration-none text_black">Ajouter une autre vente</a></button>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-3">
+                    </div>
+                </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'market/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class=" mt-4 text-center">
+        <h2>Produits de la categorie {{categorie.libelle}}</h2>
+        </div>
+        <div class="spacing1 mb-2">    
+            <a class="text-decoration-none fa fa-arrow-left eye" href="{% url 'categories' %}"><button type="button" class="mt-2 mb-2 btn btn-light " ></button></a>
+            <a href="{% url 'ajouter_produit' %}"  class="fa-solid fa-add text-decoration-none btn  add"> <span>Ajouter produit</span></a>
+
+        </div>  
+        <div class="table-responsive">
+            <table class="table table-bordered ">
+                <thead >
+                    <tr>
+                        <th class="left" scope="col">Designation</th>
+                        <th scope="col">Quantite</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col"></th>
+                        <th class="rigth" scope="col"></th>
+                    </tr>
+                </thead>
+                
+                <tbody >
+                    {% for produit in produits %}
+                    <tr>
+                        <th scope="row">{{ produit.designation }}</th>
+                        <td>{{ produit.quantite }}</td>
+                        <td>{{ produit.prix }}</td>
+                        <td>
+                            <a class="text-decoration-none" href="{% url 'edit_produit' produit.id %}" ><i  class="fa-solid fa-pen-to-square warning1"></i></a>
+                        </td>
+                        <td>
+                            <a class="text-decoration-none" hx-get="{% url 'delete_produit' produit.id %}" hx-target="#dialog"><i class="fa-solid fa-trash danger"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Placeholder for the modal -->
+    <div id="modal" class="modal fade" >
+        <div id="dialog" class="modal-dialog" >
+
+        </div>
+    </div>
+
+
+{% endblock %}

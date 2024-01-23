@@ -1,0 +1,53 @@
+{% extends 'market/base.html' %}
+
+{% block content %}
+<div class="container m">
+    <h2 class="display-5 text-center mb-2 ">Detail du promotion</h2>
+
+    <div class="row">
+        &nbsp;&nbsp;&nbsp;<a class="text-decoration-none add mb-3"
+            href="{% url 'promotions'%}" style="max-width: 80px;">Retour</a>
+
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="card p-2 h-100 actu shadow ">
+
+                    <dl>
+                        <dt>Description</dt>
+                        <dd>{{promotion.description}}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Pourcentage</dt>
+                        <dd>{{ promotion.pourcentage }} %</dd>
+                    </dl>
+                    <dl>
+                        <dt>Date de début</dt>
+                        <dd>{{promotion.date_debut}} </dd>
+                    </dl>
+                    <dl>
+                        <dt>Date de fin</dt>
+                        <dd>{{promotion.date_fin}} </dd>
+                    </dl>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 ">
+                <div class="card p-2 h-100 actu shadow ">
+                    <div class="brand">
+                        
+                    </div>
+                    <h3>Les produits en promotion</h3>
+                    {% for produit in produits %}
+                    <dt>Designation</dt>
+                    <dd>{{produit.designation}}</dd>
+                    <dt>Categorie</dt>
+                    <dd>{{produit.categorie.libelle}}</dd>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

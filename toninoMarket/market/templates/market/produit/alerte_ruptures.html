@@ -1,0 +1,32 @@
+{% extends 'market/base.html' %}
+
+{% block content %}
+    <div class="container m">
+                <h2 class="display-5 text-center mt-2 ">Alerte</h2>
+
+                {% for alerte_rupture in alerte_ruptures %}
+                    <div class="row">
+                        <div class="col-md-2">  
+                        </div>
+                        <div class="card p-2 actu shadow text-center col-md-8 mb-3 mt-3 " >
+                            <div class="row">
+                                <span class="col-md-10"> {{alerte_rupture.contenu}} </span>
+
+                                <div class="col-md-2">
+                                    <span class=" col-md-12 fa-solid fa-bell alerte_rupture"></span>
+                                    <a href="{% url 'ajouter_approvisionnement' %}">
+                                        <span class=" col-md-12 fa-solid fa-add eye"></span>
+                                    </a>    
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+                     
+                {% endfor %}
+        
+    </div>    
+{% endblock %}

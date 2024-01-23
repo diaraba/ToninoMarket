@@ -1,0 +1,66 @@
+{% extends 'market/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-2">
+
+        <h2 class="display-6 text-center mb-3 mt-3">Approvisionnement en attente</h2>
+    
+
+        <div class="spacing1 mb-2">    
+            <a class="text-decoration-none " ></a>
+            <a   class="fa-solid fa-add text-decoration-none btn  add" href="{% url 'ajouter_approvisionnement' %}"> <span>Demande appro</span></a>
+
+        </div>  
+        <div class="row mb-5 table-responsive">    
+            <table class="table table-bordered">
+                <thead >
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Date de Demande</th>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Quantite</th>
+                        <th scope="col">Prenom fournisseur</th>
+                        <th scope="col">Nom fournisseur</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                
+                <tbody >
+                    {% for approvisionnement in approvisionnements %}
+                    <tr>
+                        <th scope="row"><a class="text-decoration-none eye1"  href="{% url 'detail_approvisionnement' approvisionnement.id %}">{{ approvisionnement.titre }}</a></th>
+                        <td >{{ approvisionnement.date_demande }}</td>
+                        <td>{{ approvisionnement.produit.designation }}</td>
+                        <td>{{ approvisionnement.quantite }}</td>
+                        <td>{{ approvisionnement.fournisseur.prenom }}</td>
+                        <td>{{ approvisionnement.fournisseur.nom }}</td>
+                        <td>
+                            <a class="text-decoration-none"><i  class="fa-solid fa-pen-to-square warning1"></i></a>
+                        </td>
+                        <td>
+                            <a class="text-decoration-none"  ><i class="fa-solid fa-trash danger"></i></a>
+                        </td>
+
+                        <td>
+                            <a class="text-decoration-none"  href="{% url 'detail_approvisionnement' approvisionnement.id %}"><i class="fa-solid fa-eye text-decoration-none eye"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>  
+    </div>   
+
+    <div class="modal fade " id="modal" tabindex="-1">
+        <div class=" modal-dialog " id="dialog">
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+
+    <script src="{% static 'dialog.js' %}" ></script>    
+{% endblock %}

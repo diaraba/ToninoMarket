@@ -1,0 +1,79 @@
+{% extends 'market/base.html' %}
+
+{% load static %}
+
+    <head>
+        <meta charset="utf-8">
+        <title>Tonino Market</title>
+        <link rel="stylesheet" href="{% static 'market\styles.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        {{form.media}}
+
+    </head>
+
+{% block content %}  
+
+        <h2 class="display-5 text-center mb-4 mt-2">Modifier la promotion</h2>
+
+        <div class="row mt-4 mb-2">
+                {% if form.errors %}
+                    <div class="error">
+                        <ul class="error-list">
+                            {% for field, errors in form.errors.items %}
+                                <li class="nav-item text-center alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ field }}: {{ errors|join:", " }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="col-md"></div>
+                <div class="col-md-6 h-100 shadow">
+                    {% with WIDGET_ERROR_CLASS='is-invalid' %}
+                        <form action="{% url 'edit_promotion' promotion.id %}" method="post" class="needs-validation" novalidate>  <!-- 1 -->
+                            {% csrf_token %}  <!-- 2 -->
+
+                            <div class="mb-3">
+                                <label for="{{ form.categorie.id_for_label }}" class="form-label edit">Produit:</label>
+                                {{ form.produits }}
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.date_debut.id_for_label }}" class="form-label ">Date de début:</label>
+                                {{ form.date_debut }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.date_fin.id_for_label }}" class="form-label ">Date de fin:</label>
+                                {{ form.date_fin }}
+                            </div>
+
+                            <div class="mb-3 ">
+                                <label for="{{ form.pourcentage.id_for_label }}" class="form-label ">Pourcentage :</label>
+                                {{ form.pourcentage }}
+                                <div class="invalid-feedback">{{ form.pourcentage.errors|first }}</div>
+
+                            </div>
+
+                            <div class="mb-3 ">
+                                <label for="{{ form.description.id_for_label }}" class="form-label ">Description :</label>
+                                {{ form.description }}
+                            </div>
+                            
+                            <div class="spacing">
+                                <a href="{% url 'promotions'%}"  class="text_button   btn btn-light ">Retour</a>
+                                <button class="btn btn-primary text_button text-white" type="submit">Enregistrer</button>
+                            </div>
+
+                        </form>
+                    {% endwith %}
+                </div>
+                <div class="col-md"></div>
+
+        </div>  
+    </div>
+{% endblock %}

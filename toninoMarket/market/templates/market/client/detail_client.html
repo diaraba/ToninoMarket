@@ -1,0 +1,61 @@
+{% extends 'market/base.html' %}
+
+{% block content %}
+    <div class="container m">
+        <h2 class="display-5 text-center mb-2 ">Detail du client</h2>
+ 
+        <div class="row">    
+            &nbsp;&nbsp;&nbsp;<a class="text-decoration-none add mb-3" href="{% url 'liste_client'%}" style="max-width: 80px;">Retour</a>   
+
+            <div class="col-md-12 mb-3 ">
+                
+                <div class="card p-2 h-100 actu shadow ">
+                    <div class="row">
+                            <div class="col-md-6 ">
+
+                                {% if True %}
+                                    <div class="">
+                                        <button type="button" class="mt-4 btn add"><a class="text-decoration-none text_black" href="{% url 'achats_client' client.id %}" >Achats du client</a></button>
+                                    </div>
+                                {% endif %}
+                                <div class="p-2"> 
+                                    <dl>
+                                        <dt>Nom</dt>
+                                        <dd>{{client.nom}}</dd>
+                                    </dl>    
+                                    <dl>
+                                        <dt>Prenom</dt>
+                                        <dd>{{ client.prenom }}</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Adresse</dt>
+                                        <dd>{{client.adresse}} </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Telephone</dt>
+                                        <dd>{{client.telephone}} </dd>
+                                    </dl>
+                                </div>
+                                <dt> Date de naissance: {{client.date_naissance}} </dt>
+
+                            </div>    
+                            <div class="col-md-6 ">
+
+                                <img src="https://www.redroverk12.com/hubfs/RR_Blog_CustomerDelight.jpeg" alt="Image standard du médecin" class="img-fluid " style="min-height:auto; min-width: auto;">
+            
+                            </div>
+                    </div>
+                </div>
+
+            </div>  
+            <dl>
+                <span class="inline">
+                    <dt>Code</dt>
+                    <dd>{{client.code}}</dd>
+                </span>
+            </dl>  
+
+
+        </div>  
+    </div>    
+{% endblock %}

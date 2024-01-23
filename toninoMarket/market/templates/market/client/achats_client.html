@@ -1,0 +1,66 @@
+{% extends 'market/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-2">
+
+        <h2 class="display-5 text-center mb-3 mt-3">Liste des achats de</h2>
+        <dd class="text-center gras">{{client.prenom }} &nbsp;  {{client.nom }}</dd>
+
+        <div class="spacing1 mb-2">    
+            <a class="text-decoration-none fa fa-arrow-left eye" href="{% url 'detail_client' client.id %}"><button type="button" class="mt-2 mb-2 btn btn-light " ></button></a>
+            <a   class="fa-solid fa-add text-decoration-none btn  add" href="{% url 'ajouter_vente' %}" > <span>Ajouter achat</span></a>
+
+        </div>  
+        <div class="row mb-5 table-responsive">    
+            <table class="table table-bordered">
+                <thead >
+                    <tr>
+                        <th scope="col">Code client</th>
+                        <th scope="col">Designation</th>
+                        <th scope="col">Quantite</th>
+                        <th scope="col">Montant</th>
+                        <th scope="col">Prenom caissier</th>
+                        <th scope="col">Nom caissier</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                
+                <tbody >
+                    {% for achat in achats %}
+                    <tr>
+                        <th scope="row"><a class="text-decoration-none eye"  href="{% url 'vente_detail' achat.id %}">{{ client.code }}</a></th>
+                        <td >{{ achat.designation }}</td>
+                        <td>{{ achat.quantite }}</td>
+                        <td>{{ achat.montant }}</td>
+                        <td>{{ achat.caissier.prenom }}</td>
+                        <td>{{ achat.caissier.nom }}</td>
+                        <td>
+                            <a class="text-decoration-none" href="{% url 'edit_vente' achat.id %}" ><i  class="fa-solid fa-pen-to-square warning1"></i></a>
+                        </td>
+                        <td>
+                            <a class="text-decoration-none" hx-get="{% url 'delete_vente' achat.id %}" hx-target="#dialog" ><i class="fa-solid fa-trash danger"></i></a>
+                        </td>
+
+                        <td>
+                            <a class="text-decoration-none"  href="{% url 'vente_detail' achat.id %}"><i class="fa-solid fa-eye text-decoration-none eye"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>  
+    </div>   
+
+    <div class="modal fade " id="modal" tabindex="-1">
+        <div class=" modal-dialog " id="dialog">
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+
+    <script src="{% static 'dialog.js' %}" ></script>    
+{% endblock %}

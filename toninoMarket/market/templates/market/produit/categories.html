@@ -1,0 +1,59 @@
+{% extends 'market/base.html' %}
+
+{% load static %}
+
+    <head >
+        <title>Liste des categories </title>
+        <link rel="stylesheet" href="{% static 'market\styles.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+        <!-- Include Bootstrap CSS -->
+
+
+    </head>
+
+
+{% block content %}
+<body>
+    <div class="container mt-2">
+
+        <h2 class="display-5 text-center mb-3 mt-3">Liste des categories</h2>
+    
+        <div class="text-center mb-5">
+            <a   class="fa-solid fa-add text-decoration-none  btn  add" hx-get="{% url 'ajouter_categorie'%}" hx-target="#dialog"  > <span>Ajouter une categorie</span></a>
+        </div>
+
+        <div class="row mb-5">    
+            {% for categorie in categories %}
+
+                <div class="col-md-3 mb-5 ">
+                    <div class="card p-2 h-100 liste text-center shadow">
+                        <div class="p-2 ">
+                            <h1><a href="{% url 'categorie_produit' categorie.id %}" class="text-decoration-none titre  display-5">{{categorie.code}}</a></h1>
+
+                            <p>{{ categorie.libelle }}</p>
+                        </div>
+                        <div class=" spacing">
+                            <a hx-get="{% url 'edit_categorie' categorie.id %}" hx-target="#dialog"  class="fa-solid fa-pen-to-square text-decoration-none warning1" >
+
+                            <a hx-get="{% url 'delete_categorie' categorie.id %}" hx-target="#dialog"  class="fa-solid fa-trash text-decoration-none danger1" >
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}  
+        </div>  
+    </div>   
+
+    <div class="modal fade " id="modal" tabindex="-1">
+        <div class="actu modal-dialog " id="dialog">
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+
+    <script src="{% static 'dialog.js' %}" ></script>    
+</body>
+{% endblock %}

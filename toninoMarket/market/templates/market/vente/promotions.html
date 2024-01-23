@@ -1,0 +1,76 @@
+{% extends 'market/base.html' %}
+
+{% load static %}
+
+    <head >
+        <title>Liste des promotions </title>
+        <link rel="stylesheet" href="{% static 'market\styles.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+        <!-- Include Bootstrap CSS -->
+
+
+    </head>
+
+
+{% block content %}
+<body>
+    <div class="container mt-2">
+
+        <h3 class="display-6 text-center mb-3 mt-3">Liste des promotions</h3>
+        <div class="text-center ">
+            <a   class="fa-solid fa-add text-decoration-none  btn  add " href="{% url 'ajouter_promotion' %}"> <span>Ajouter une promotion</span></a>
+        </div>
+        <div class="text-center mt-2 mb-4 ">
+        </div>
+        <div class="row mb-5 mt-3">    
+            {% for promotion in promotions %}
+
+                <div class="col-md-3 mb-5 ">
+                    <div class="card p-2 h-100 liste text-center shadow ">
+                        <div class="p-2 ">
+                            <div class="spacing">
+                                <dl> 
+                                    <dt>
+                                        Début
+                                    </dt>
+                                    <dd>
+                                        {{ promotion.date_debut }}
+                                    </dd>
+                                </dl>
+
+                                <dl> 
+                                    <dt>
+                                        Fin
+                                    </dt>
+                                    <dd>
+                                        {{ promotion.date_fin }}
+                                    </dd>
+                                </dl>
+                            </div>
+                            <h4><a class="text-decoration-none titre  display-6 " href="{% url 'promotion_detail' promotion.id %}">{{ promotion.pourcentage }} %</a></h4>
+
+                        </div>
+                        <div class=" spacing">
+                            <a class="fa-solid fa-pen-to-square text-decoration-none warning1" href="{% url 'edit_promotion' promotion.id %}"></a>
+
+                            <a  class="fa-solid fa-trash text-decoration-none danger1" hx-get="{% url 'delete_promotion' promotion.id %}" hx-target="#dialog"   ></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}  
+        </div>  
+    </div>   
+
+    <div class="modal fade " id="modal" tabindex="-1">
+        <div class="actu modal-dialog " id="dialog">
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+
+    <script src="{% static 'dialog.js' %}" ></script>    
+</body>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'market/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-2">
+
+        <h2 class="display-5 text-center mb-3 mt-3">Liste des clients</h2>
+    
+
+        <div class="spacing1 mb-2">    
+            <a class="text-decoration-none "></a>
+            <a hx-get="{% url 'ajouter_client' %}" hx-target="#dialog"  class="fa-solid fa-add text-decoration-none btn  add"> <span>Ajouter client</span></a>
+
+        </div>  
+        <div class="row mb-5 table-responsive">    
+            <table class="table table-bordered">
+                <thead >
+                    <tr>
+                        <th class="left" scope="col">Code client</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Telephone</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                
+                <tbody >
+                    {% for client in clients %}
+                    <tr>
+                        <th scope="row"><a class="text-decoration-none eye1" href="{% url 'detail_client' client.id %}" >{{ client.code }}</a></th>
+                        <td >{{ client.nom }}</td>
+                        <td>{{ client.prenom }}</td>
+                        <td>{{ client.adresse }}</td>
+                        <td>{{ client.telephone }}</td>
+                        <td>
+                            <a class="text-decoration-none" hx-get="{% url 'edit_client' client.id %}" hx-target="#dialog" ><i  class="fa-solid fa-pen-to-square warning1"></i></a>
+                        </td>
+                        <td>
+                            <a class="text-decoration-none" hx-get="{% url 'delete_client' client.id %}" hx-target="#dialog"><i class="fa-solid fa-trash danger"></i></a>
+                        </td>
+
+                        <td>
+                            <a class="text-decoration-none" href="{% url 'detail_client' client.id %}" ><i class="fa-solid fa-eye text-decoration-none eye"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>  
+    </div>   
+
+    <div class="modal fade " id="modal" tabindex="-1">
+        <div class=" modal-dialog " id="dialog">
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+
+    <script src="{% static 'dialog.js' %}" ></script>    
+{% endblock %}
